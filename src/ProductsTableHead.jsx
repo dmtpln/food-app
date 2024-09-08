@@ -5,9 +5,8 @@ export const ProductsTableHead = ({ meals }) => {
     return (
         <TableHead>
             <TableRow>
-                <TableCell>Продукт</TableCell>
                 {meals.map((meal) => (
-                    <TableCell key={meal} align="center">{meal}</TableCell>
+                    <TableCell key={meal} width='33%' align="center">{meal}</TableCell>
                 ))}
             </TableRow>
         </TableHead>

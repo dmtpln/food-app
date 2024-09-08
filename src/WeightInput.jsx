@@ -16,6 +16,7 @@ export const WeightInput = ({ product, meal, onChange }) => {
 
     return (
         <TextField
+            fullWidth
             size='small'
             label='Вес'
             slotProps={slotProps}

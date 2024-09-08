@@ -2,7 +2,7 @@
   "name": "food-calc",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dmtpln.github.io/food-calc",
+  "homepage": "https://dmtpln.github.io/food-app/",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -16,7 +16,6 @@
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
     "react-sticky-el": "^2.1.1",
-    "react-use": "^17.5.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
