@@ -1,18 +1,19 @@
 import React from 'react';
 import {Box, Typography} from "@mui/material";
 
-import products from './products.json'
 
-export const Result = ({ data }) => {
-    const result = Object.keys(data).reduce((acc, product) => {
-        return Object.values(data[product]).reduce((acc2, weight) => {
+export const Result = ({ data, products }) => {
+    const result = Object.keys(data).reduce((acc, productName) => {
+        const product = products.find((product) => product.name === productName);
+
+        return Object.values(data[productName]).reduce((acc2, weight) => {
             const factor = weight / 100;
 
             return {
-                ccal: acc2.ccal + Math.round(products[product] * factor),
-                carbs: acc2.carbs + 0,
-                fats: acc2.fats + 0,
-                proteins: acc2.proteins + 0
+                ccal: acc2.ccal + Math.round(product.ccal * factor),
+                carbs: acc2.carbs + Math.round(product.carbs * factor),
+                fats: acc2.fats + Math.round(product.fats * factor),
+                proteins: acc2.proteins + Math.round(product.proteins * factor)
             }
         }, acc)
     }, {

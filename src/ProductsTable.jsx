@@ -4,23 +4,25 @@ import Sticky from 'react-sticky-el';
 import sortBy from "lodash/sortBy";
 
 import { Result } from "./Result";
+import { Search } from "./Search";
 import { ProductsTableBody } from "./ProductsTableBody";
 import { ProductsTableHead } from "./ProductsTableHead";
-import productsData from './products.json'
-import {Search} from "./Search";
+import products from './products.json'
 
-const products = Object.keys(productsData);
 const MEALS_AMOUNT = 3;
 
 export const ProductsTable = () => {
     const [data, setData] = useState({})
     const deferredData = useDeferredValue(data)
 
-    const meals = useMemo(() => Array.from({ length: MEALS_AMOUNT }).map((_, index) => `Приём ${index + 1}`), [])
+    const meals = useMemo(() =>
+        Array.from({ length: MEALS_AMOUNT }).map((_, index) => `Приём ${index + 1}`),
+        []
+    )
 
     const sortedProducts = useMemo(() => sortBy(products, [
-        (product) => !deferredData[product],
-        (product) => product
+        (product) => !deferredData[product.name],
+        (product) => product.name
     ]), [deferredData])
 
     const handleChangeWeight = useCallback( (product, meal, value) => {
@@ -38,19 +40,14 @@ export const ProductsTable = () => {
             <Sticky stickyStyle={{ zIndex: 1000 }}>
                 <Box sx={{ paddingY: 3, bgcolor: 'background.paper' }}>
                     <Grid container spacing={2} sx={{ justifyContent: 'space-between', alignItems: 'end' }}>
-                        <Grid size={{
-                            sm: 6,
-                            md: 4
-                        }}>
+                        <Grid size={{ sm: 6, md: 4 }}>
                             <Search />
                         </Grid>
-                        <Grid
-                            size={{
-                                xs: 'grow',
-                                sm: 3
-                            }}
-                        >
-                            <Result data={deferredData} />
+                        <Grid size={{ xs: 'grow', sm: 3 }}>
+                            <Result
+                                data={deferredData}
+                                products={sortedProducts}
+                            />
                         </Grid>
                     </Grid>
                 </Box>
